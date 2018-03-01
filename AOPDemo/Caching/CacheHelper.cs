@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using Unity.Interception.PolicyInjection.Pipeline;
 
-namespace AOPDemo.Attributes
+namespace AOPDemo.Caching
 {
     public static class CacheHelper
     {
