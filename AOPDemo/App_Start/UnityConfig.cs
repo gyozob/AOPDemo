@@ -1,4 +1,5 @@
 ﻿using AOPDemo.Attributes;
+using AOPDemo.Caching;
 using AOPDemo.Controllers;
 using AOPDemo.Repositories;
 using Unity;
@@ -17,6 +18,7 @@ namespace AOPDemo.App_Start
                 .SetDefaultInterceptorFor<IValuesRepository>(new TransparentProxyInterceptor());
             container.RegisterType<ICacheAttributeCallHandler, CacheAttributeCallHandler>();
             container.RegisterType<IValuesRepository, ValuesRepository>();
+            container.RegisterType<ICacheProvider, MemoryCacheProvider>();            
             container.RegisterType<ValuesController>();
             return container;
         }

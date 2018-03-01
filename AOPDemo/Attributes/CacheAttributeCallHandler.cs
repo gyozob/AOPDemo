@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AOPDemo.Caching;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -8,6 +9,11 @@ namespace AOPDemo.Attributes
 {
     public class CacheAttributeCallHandler : ICacheAttributeCallHandler
     {
+        private readonly ICacheProvider _cache;
+        public CacheAttributeCallHandler(ICacheProvider cache)
+        {
+            _cache = cache;
+        }
         private string _cacheKeyPattern;
         public int Order
         {

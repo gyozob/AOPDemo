@@ -5,6 +5,7 @@ namespace AOPDemo.Caching
 {
     public interface ICacheProvider
     {
-        Task<T> GetOrSet<T>(string key, Func<Task<T>> cacheable);
+        Task<T>  Get<T>(string key);
+        Task<T> Set<T>(string key, Func<Task<T>> cacheable, TimeSpan duration);
     }
 }
