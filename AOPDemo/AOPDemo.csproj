@@ -236,6 +236,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Attributes\CacheAttributeCallHandler.cs" />
     <Compile Include="Attributes\CacheAttributeHandler.cs" />
+    <Compile Include="Attributes\CacheHelper.cs" />
+    <Compile Include="Attributes\ICacheAttributeCallHandler.cs" />
     <Compile Include="Caching\MemoryCacheProvider.cs" />
     <Compile Include="Caching\ICacheProvider.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

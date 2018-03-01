@@ -16,9 +16,10 @@ namespace AOPDemo.App_Start
             container.AddNewExtension<Interception>()
                 .Configure<Interception>()
                 .SetDefaultInterceptorFor<IValuesRepository>(new TransparentProxyInterceptor());
+
             container.RegisterType<ICacheAttributeCallHandler, CacheAttributeCallHandler>();
             container.RegisterType<IValuesRepository, ValuesRepository>();
-            container.RegisterType<ICacheProvider, MemoryCacheProvider>();            
+            container.RegisterInstance<ICacheProvider>(new MemoryCacheProvider());
             container.RegisterType<ValuesController>();
             return container;
         }

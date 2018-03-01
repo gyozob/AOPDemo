@@ -2,7 +2,7 @@
 {
     public class ValuesRepository : IValuesRepository
     {
-        public string Get(GetValueRequest request, int good)
+        public string Get(GetValueRequest request, int dummy)
         {
             return $"value - {request.Id}";
         }

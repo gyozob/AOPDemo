@@ -1,4 +1,5 @@
-﻿using Unity;
+﻿using System;
+using Unity;
 using Unity.Interception.PolicyInjection.Pipeline;
 using Unity.Interception.PolicyInjection.Policies;
 
@@ -7,13 +8,19 @@ namespace AOPDemo.Attributes
     public class CacheAttribute : HandlerAttribute
     {
         private readonly string _cacheKeyPattern;
-        public CacheAttribute(string cacheKeyPatter)
+        private readonly TimeSpan _duration;
+        public CacheAttribute(string cacheKeyPatter, int durationMinutes)
         {
             _cacheKeyPattern = cacheKeyPatter;
+            _duration = new TimeSpan(0, durationMinutes, 0);
         }
         public override ICallHandler CreateHandler(IUnityContainer container)
         {
-            return container.Resolve<ICacheAttributeCallHandler>().SetCacheKeyPattern(_cacheKeyPattern);
+            return 
+                container
+                    .Resolve<ICacheAttributeCallHandler>()
+                    .SetCacheKeyPattern(_cacheKeyPattern)
+                    .SetDuration(_duration);
         }
     }
 }

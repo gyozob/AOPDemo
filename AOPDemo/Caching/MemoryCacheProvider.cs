@@ -6,43 +6,42 @@ namespace AOPDemo.Caching
 {
     public class MemoryCacheProvider : ICacheProvider
     {
-        private readonly ConcurrentDictionary<string, Task<Tuple<DateTime, object>>> _cache;
+        private static readonly ConcurrentDictionary<string, Tuple<DateTime, object>> _cache = new ConcurrentDictionary<string, Tuple<DateTime, object>>();
         public MemoryCacheProvider()
         {
-            _cache = new ConcurrentDictionary<string, Task<Tuple<DateTime, object>>>();
         }
-        public async Task<T> Get<T>(string key)
+        public object Get(string key)
         {
-            Task<Tuple<DateTime, object>> outValue;
+            Tuple<DateTime, object> outValue;
             if (_cache.TryGetValue(key, out outValue))
             {
-                return (T)(await outValue).Item2;
+                return outValue.Item2;
             }
 
-            return default(T);            
+            return null;            
         }
 
-        public async Task<T> Set<T>(string key, Func<Task<T>> cacheable, TimeSpan duration)
+        public object Set(string key, object cacheable, TimeSpan duration)
         {
-            var result = await _cache.AddOrUpdate(key,
-                async (k) =>
+            var result = _cache.AddOrUpdate(key,
+                (k) =>
                 {
-                    var cacheableItem = await cacheable();
-                    return Tuple.Create(DateTime.UtcNow.AddMilliseconds(duration.Milliseconds), (object)cacheableItem);
+                    var cacheableItem = cacheable;
+                    return Tuple.Create(DateTime.UtcNow.AddMilliseconds(duration.Milliseconds), cacheableItem);
                 },
-                async (k, cache) =>
+                (k, cache) =>
                 {
-                    var cachedItem = await cache;
+                    var cachedItem = cache;
                     if (cachedItem.Item1 >= DateTime.Now)
                     {
                         return cachedItem;
                     }
-                    var cacheableItem = await cacheable();
-                    return Tuple.Create(DateTime.UtcNow.AddMilliseconds(duration.Milliseconds), (object)cacheableItem);
+                    var cacheableItem = cacheable;
+                    return Tuple.Create(DateTime.UtcNow.AddMilliseconds(duration.Milliseconds), cacheableItem);
                 }
                 );
 
-            return (T)result.Item2;
+            return result.Item2;
         }
     }
 }

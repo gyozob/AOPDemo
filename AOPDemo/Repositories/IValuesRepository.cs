@@ -4,8 +4,8 @@ namespace AOPDemo.Repositories
 {
     public interface IValuesRepository
     {
-        [Cache("{Id}-{good}")]
-        string Get(GetValueRequest request, int good);
+        [Cache(cacheKeyPatter:"{Id}-{dummy}", durationMinutes: 1)]
+        string Get(GetValueRequest request, int dummy);
     }
 
     public class GetValueRequest
