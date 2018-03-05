@@ -3,3 +3,5 @@ platform: Any CPU
 configuration: Debug
 build:
   project: AOPDemo.sln
+before_build:
+  - nuget restore
