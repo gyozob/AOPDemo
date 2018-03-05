@@ -1,4 +1,6 @@
-﻿namespace AOPDemo.Repositories
+﻿using AOPDemo.Models;
+
+namespace AOPDemo.Repositories
 {
     public class ValuesRepository : IValuesRepository
     {

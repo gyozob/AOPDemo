@@ -1,15 +1,11 @@
 ﻿using AOPDemo.Attributes;
+using AOPDemo.Models;
 
 namespace AOPDemo.Repositories
 {
     public interface IValuesRepository
     {
-        [Cache(cacheKeyPatter:"{Id}-{dummy}", durationMinutes: 1)]
+        [Cache(cacheKeyPattern:"{Id}-{dummy}", durationMinutes: 1)]
         string Get(GetValueRequest request, int dummy);
-    }
-
-    public class GetValueRequest
-    {
-        public int Id { get; set; }
     }
 }

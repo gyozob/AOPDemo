@@ -1,4 +1,5 @@
-﻿using AOPDemo.Repositories;
+﻿using AOPDemo.Models;
+using AOPDemo.Repositories;
 using System.Web.Http;
 
 namespace AOPDemo.Controllers

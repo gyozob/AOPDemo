@@ -9,9 +9,9 @@ namespace AOPDemo.Attributes
     {
         private readonly string _cacheKeyPattern;
         private readonly TimeSpan _duration;
-        public CacheAttribute(string cacheKeyPatter, int durationMinutes)
+        public CacheAttribute(string cacheKeyPattern, int durationMinutes)
         {
-            _cacheKeyPattern = cacheKeyPatter;
+            _cacheKeyPattern = cacheKeyPattern;
             _duration = new TimeSpan(0, durationMinutes, 0);
         }
         public override ICallHandler CreateHandler(IUnityContainer container)
