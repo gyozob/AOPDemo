@@ -26,11 +26,7 @@ namespace AOPDemo.Attributes
         }
         public IMethodReturn Invoke(IMethodInvocation input, GetNextHandlerDelegate getNext)
         {
-            var key = CacheHelper.BuildCacheKey(new TargetMethodArgsMapToKeyPattern()
-            {
-                Method = input,
-                KeyPattern = _cacheKeyPattern
-            });
+            var key = CacheHelper.BuildCacheKey(input, _cacheKeyPattern);
             
             var cached = _cache.Get(key);
             if (cached != null)
