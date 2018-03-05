@@ -1,3 +1,7 @@
-language: csharp
-solution: AOPDemo.sln
-os: windows
+language: c
+
+install:
+  - sudo apt-get install mono-devel mono-gmcs
+
+script:
+  - xbuild CI.proj
