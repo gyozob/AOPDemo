@@ -4,7 +4,7 @@
   <Target Name="CI" DependsOnTargets="Build" />
 
   <Target Name="Build">
-    <MSBuild Projects="AOPDemo.sln" Properties="Configuration=Debug;Platform=x64" />
+    <MSBuild Projects="AOPDemo.sln" Properties="Configuration=Release;Platform=x86" />
   </Target>
 
 </Project>
